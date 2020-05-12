@@ -1,0 +1,38 @@
+from tkinter import *
+import pandas as pd
+from pandas import DataFrame
+
+
+def submit_fields():
+
+    df1 = pd.read_excel(r'C:\Users\PJ\Desktop\excel.xlsx', header=0)
+    SeriesA = df1['Operator']
+    SeriesB = df1['Number']
+    A = cell.Series(entry1.get())
+    B = cell.Series(entry2.get())
+    SeriesA = SeriesA.append(A)
+    SeriesB = SeriesB.append(B)
+    df2 = cell.DataFrame({"Operator":SeriesA, "Number":SeriesB})
+    df2.to_excel(df1, index=False)
+    entry1.delete(0, END)
+    entry2.delete(0, END)
+
+
+master = Tk()
+master.title("User Info")
+master.geometry("220x100")
+master.config(background="black")
+
+Label(master, text="Operator:", bg="black", fg="white").grid(row=0)
+Label(master, text="Number:", bg="black", fg="white").grid(row=1)
+
+entry1 = Entry(master)
+entry2 = Entry(master)
+
+entry1.grid(row=0, column=1)
+entry2.grid(row=1, column=1)
+
+Button(master, text='Quit' , command=master.quit, bg="red").grid(row=3,column=0, pady=4)
+Button(master, text='Submit', command=submit_fields, bg="green").grid(row=3,column=1, pady=4)
+
+mainloop()
