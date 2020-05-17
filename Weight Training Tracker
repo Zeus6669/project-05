@@ -1,0 +1,129 @@
+from tkinter import *
+import pandas as pd
+
+def submit_fields():
+    path = 'excel.xlsx'
+    df1 = pd.read_excel(path)
+    SeriesA = df1['Day']
+    SeriesB = df1['ex. Name']
+    SeriesC = df1['1st set']
+    SeriesD = df1['2nd set']
+    SeriesE = df1['3rd set']
+    SeriesF = df1['4th set']
+    SeriesG = df1['5th set']
+    SeriesI = df1['RPS #1']
+    SeriesJ = df1['RPS #2']
+    SeriesK = df1['RPS #3']
+    SeriesL = df1['RPS #4']
+    SeriesM = df1['RPS #5']
+
+    A = pd.Series(entry1.get())
+    B = pd.Series(entry2.get())
+    C = pd.Series(entry3.get())
+    D = pd.Series(entry4.get())
+    E = pd.Series(entry5.get())
+    F = pd.Series(entry6.get())
+    G = pd.Series(entry7.get())
+    I = pd.Series(entry8.get())
+    J = pd.Series(entry9.get())
+    K = pd.Series(entry10.get())
+    L = pd.Series(entry11.get())
+    M = pd.Series(entry12.get())
+
+
+    SeriesA = SeriesA.append(A)
+    SeriesB = SeriesB.append(B)
+    SeriesC = SeriesC.append(C)
+    SeriesD = SeriesD.append(D)
+    SeriesE = SeriesE.append(E)
+    SeriesF = SeriesF.append(F)
+    SeriesG = SeriesG.append(G)
+    SeriesI = SeriesI.append(I)
+    SeriesJ = SeriesJ.append(J)
+    SeriesK = SeriesK.append(K)
+    SeriesL = SeriesL.append(L)
+    SeriesM = SeriesM.append(M)
+
+    df2 = pd.DataFrame({"Day":SeriesA, "ex. Name":SeriesB, "1st set":SeriesC, "2nd set":SeriesD, "3rd set":SeriesE, "4th set":SeriesF, "5th set":SeriesG, "RPS #1":SeriesI, "RPS #2":SeriesJ, "RPS #3":SeriesK, "RPS #4":SeriesL, "RPS #5":SeriesM})
+    df2.to_excel(path, index=False)
+
+    entry1.delete(0, END)
+    entry2.delete(0, END)
+    entry3.delete(0, END)
+    entry4.delete(0, END)
+    entry5.delete(0, END)
+    entry6.delete(0, END)
+    entry7.delete(0, END)
+    entry8.delete(0, END)
+    entry9.delete(0, END)
+    entry10.delete(0, END)
+    entry11.delete(0, END)
+    entry12.delete(0, END)
+
+
+master = Tk()
+master.geometry("500x240")
+master.title("Weight Training Tracker")
+master.config(background="black")
+
+
+#screen label left side
+
+Label(master, text="What day is it?",bg="black", fg="white").grid(row=0)
+Label(master, text="Exercise name:",bg="black", fg="white").grid(row=1)
+Label(master, text="First Set Weight (Lbs)",bg="black", fg="white").grid(row=2)
+Label(master, text="Second Set Weight (Lbs)",bg="black", fg="white").grid(row=3)
+Label(master, text="Third Set Weight (Lbs)",bg="black", fg="white").grid(row=4)
+Label(master, text="Forth Set Weight (Lbs)",bg="black", fg="white").grid(row=5)
+Label(master, text="Fifth Set Weight (Lbs)",bg="black", fg="white").grid(row=6)
+
+#screen label right side
+
+Label(master, text="Reps: ",bg="black", fg="white").grid(row=2, column=6)
+Label(master, text="Reps: ",bg="black", fg="white").grid(row=3, column=6)
+Label(master, text="Reps: ",bg="black", fg="white").grid(row=4, column=6)
+Label(master, text="Reps: ",bg="black", fg="white").grid(row=5, column=6)
+Label(master, text="Reps: ",bg="black", fg="white").grid(row=6, column=6)
+
+#Entry bars for the weight amount
+
+entry1 = Entry(master)
+entry2 = Entry(master)
+entry3 = Entry(master)
+entry4 = Entry(master)
+entry5 = Entry(master)
+entry6 = Entry(master)
+entry7 = Entry(master)
+
+#Entry bars for the reps amount
+
+entry8 = Entry(master)
+entry9 = Entry(master)
+entry10 = Entry(master)
+entry11 = Entry(master)
+entry12 = Entry(master)
+
+#position of entry bar for left side label
+
+
+entry1.grid(row=0, column=1)
+entry2.grid(row=1, column=1)
+entry3.grid(row=2, column=1)
+entry4.grid(row=3, column=1)
+entry5.grid(row=4, column=1)
+entry6.grid(row=5, column=1)
+entry7.grid(row=6, column=1)
+
+#position of entry bar for right side label
+
+entry8.grid(row=2, column=10)
+entry9.grid(row=3, column=10)
+entry10.grid(row=4, column=10)
+entry11.grid(row=5, column=10)
+entry12.grid(row=6, column=10)
+
+
+Button(master, text='Quit', command=master.quit).grid(row=10,column=0, pady=4)
+Button(master, text='Submit', command=submit_fields).grid(row=10,column=1, pady=4)
+
+mainloop()
